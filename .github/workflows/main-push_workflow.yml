@@ -1,4 +1,4 @@
-name: CI/CD для YaTrack
+name: CI/CD для Employer for Tracker
 
 on:
   push:
@@ -103,7 +103,7 @@ jobs:
 
             sudo docker compose stop
 
-            sudo docker compose rm oskalov/yatrack-back
-            sudo docker compose pull oskalov/yatrack-back
+            sudo docker compose rm oskalov/emptrack-back
+            sudo docker compose pull oskalov/emptrack-back
 
             sudo docker compose up -d

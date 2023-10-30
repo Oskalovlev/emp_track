@@ -1,4 +1,4 @@
-name: CI/CD для YaTrack
+name: CI/CD для Employer for Tracker
 
 on:
   pull_request:

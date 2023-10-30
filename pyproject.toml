@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "emp-track"
+version = "0.1.0"
+description = ""
+authors = ["Oskalovlev <111913579+Oskalovlev@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{ include = "*", from = "src" },]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.2.5"
+python-dotenv = "^1.0.0"
+drf-yasg = "^1.21.7"
+drf-extra-fields = "^3.7.0"
+django-filter = "^23.3"
+djangorestframework = "^3.14.0"
+djoser = "^2.2.0"
+djangorestframework-simplejwt = "^5.3.0"
+gunicorn = "^21.2.0"
+pillow = "^10.1.0"
+psycopg2-binary = "^2.9.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.4.0"
+
+[tool.poetry.group.test]
+optional = true
+
+[tool.poetry.group.test.dependencies]
+flake8 = "6.1.0"
+pep8-naming = "0.13.3"
+flake8-return = "1.2.0"
+pytest = "^7.4.2"
