@@ -60,7 +60,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
+    # "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -96,10 +96,10 @@ DATABASES = {
         "ENGINE": os.getenv(
             "DB_ENGINE", default="django.db.backends.postgresql"
         ),  # noqa
-        "NAME": os.getenv("DB_NAME", default="postgres"),
-        "USER": os.getenv("PG_USER", default="postgres"),
-        "PASSWORD": os.getenv("PG_PASSWORD", default="postgres"),
-        "HOST": os.getenv("DB_HOST", default="db"),
+        "NAME": os.getenv("DB_NAME", default="emptrack"),
+        "USER": os.getenv("POSTGRES_USER", default="postgres"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="postgres"),
+        "HOST": os.getenv("DB_HOST", default="localhost"),
         "PORT": os.getenv("DB_PORT", default="5432"),
     }
 }
@@ -157,7 +157,7 @@ REST_FRAMEWORK = {
 }
 
 DJOSER = {
-    "LOGIN_FIELD": "email",
+    "LOGIN_FIELD": "username",
     "SEND_ACTIVATION_EMAIL": False,
     "HIDE_USERS": False,
     "PERMISSIONS": {

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import City, Skill
+from backend.core.models import City, Skill
 
 # admin.site.register(Organization)
 admin.site.register(City)

@@ -1,8 +1,8 @@
 from django.db import models
 from django.conf import settings
 
-from vacancy.models import Vacancy
-from resume.models import Resume
+from backend.vacancy.models import Vacancy
+from backend.resume.models import Resume
 
 # from user.models import User
 

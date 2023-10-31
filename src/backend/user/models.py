@@ -55,14 +55,12 @@ class User(AbstractUser):
         ],
         help_text=(settings.LENGTH_HELP),
     )
-
-    last_visited = models.DateTimeField(
-        verbose_name="Последний визит",
-        auto_now_add=False,
-        null=True,
-        blank=True,
-    )
-
+    # last_visited = models.DateTimeField(
+    #     verbose_name="Последний визит",
+    #     auto_now_add=False,
+    #     null=True,
+    #     blank=True,
+    # )
     role = models.CharField(choices=settings.ROLE)
 
     class Meta:

@@ -3,8 +3,8 @@
 from django.db import models
 from django.conf import settings
 
-from user.models import User
-from core.models import Skill
+from backend.user.models import User
+from backend.core.models import Skill, City
 
 # from vacancy.models import Vacancy
 
@@ -30,13 +30,22 @@ class Resume(models.Model):
         choices=settings.GENDER_FLAG,
         verbose_name="Пол",
     )
-    # city = models.ForeignKey(
-    #     City,
-    #     on_delete=models.SET_NULL,
-    #     verbose_name="Город",
-    # )
+    grade = models.CharField(
+        "Уровень",
+        max_length=settings.MAX_LENGTH,
+    )
+    birthday = models.DateField(
+        "День рождения",
+        null=True,
+        blank=True,
+    )
+    city = models.ForeignKey(
+        City,
+        on_delete=models.SET_NULL,
+        verbose_name="Город",
+    )
     # grade = models.CharField("Грейд")
-    city = models.CharField("Город", max_length=50)
+    # city = models.CharField("Город", max_length=50)
     telegram = models.CharField(
         "Телеграм",
         max_length=50,
@@ -49,12 +58,7 @@ class Resume(models.Model):
     about_me = models.TextField(
         "О себе",
     )
-    birthday = models.DateField(
-        "День рождения",
-        null=True,
-        blank=True,
-    )
-    status_type_work = models.PositiveSmallIntegerField(
+    type_work = models.PositiveSmallIntegerField(
         "Тип работы",
         choices=settings.TYPE_WORK,
         default=settings.ZERO,
@@ -67,10 +71,6 @@ class Resume(models.Model):
     date_created = models.DateTimeField(
         "Создание резюме",
         auto_now=True,
-    )
-    level = models.CharField(
-        "Уровень",
-        max_length=settings.MAX_LENGTH,
     )
 
     class Meta:
@@ -150,13 +150,10 @@ class Experience(models.Model):
     )
 
     position = models.CharField(
-        verbose_name="Позиция",
+        verbose_name="Должность",
         max_length=settings.MAX_LENGTH,
     )
-    period = models.CharField(
-        verbose_name="Период",
-        max_length=settings.MAX_LENGTH,
-    )
+    period = models.DurationField("Период")
     duties = models.TextField(
         verbose_name="Обязанности",
     )
@@ -169,6 +166,42 @@ class Experience(models.Model):
         return f"{self.position}"
 
 
+class BaseEducationModel(models.Model):
+    name = models.CharField(
+        "Название",
+        max_length=settings.MAX_LENGTH,
+    )
+    speciality = models.CharField(
+        "Специальность",
+        max_length=settings.MAX_LENGTH,
+    )
+    period = models.CharField(
+        "Период",
+        max_length=settings.MAX_LENGTH,
+    )
+
+    class Meta:
+        abstract = True
+
+
+class HigherEducation(BaseEducationModel):
+
+    institution = models.CharField(
+        "Учебное заведение",
+        max_length=settings.MAX_LENGTH,
+    )
+
+    class Meta:
+        verbose_name = "Высшее образование"
+        verbose_name_plural = "Высшие образования"
+
+
+class CourseEducation(BaseEducationModel):
+    class Meta:
+        verbose_name = "Дополнительное образование"
+        verbose_name_plural = "Дополнительные образования"
+
+
 class Education(models.Model):
     resume = models.ForeignKey(
         Resume,
@@ -176,22 +209,15 @@ class Education(models.Model):
         related_name="educations",
         verbose_name="Образование",
     )
-
-    grade = models.CharField(
-        "Уровень образования",
-        max_length=settings.MAX_LENGTH,
+    higher = models.ForeignKey(
+        HigherEducation,
+        on_delete=models.CASCADE,
+        related_name="educations",
     )
-    institution = models.CharField(
-        "Университет",
-        max_length=settings.MAX_LENGTH,
-    )
-    period = models.CharField(
-        "Период",
-        max_length=settings.MAX_LENGTH,
-    )
-    speciality = models.CharField(
-        "Специальность",
-        max_length=settings.MAX_LENGTH,
+    course = models.ForeignKey(
+        CourseEducation,
+        on_delete=models.CASCADE,
+        related_name="educations",
     )
 
     class Meta:

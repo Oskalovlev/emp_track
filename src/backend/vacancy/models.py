@@ -1,8 +1,8 @@
 from django.db import models
 from django.conf import settings
 
-from user.models import User
-from core.models import City, Skill
+from backend.user.models import User
+from backend.core.models import City, Skill
 
 
 class Vacancy(models.Model):

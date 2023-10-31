@@ -1,10 +1,10 @@
 import django_filters
 
-from resume.models import Resume, SkillInResume
+from backend.resume.models import Resume, SkillInResume
 
 # from user.models import Subscription, User
-from vacancy.models import Vacancy, SkillInVacancy
-from tracker.models import Favorite
+from backend.vacancy.models import Vacancy, SkillInVacancy
+from backend.tracker.models import Favorite
 
 
 class SelectionResumesFilter(django_filters.FilterSet):
@@ -71,8 +71,7 @@ class SelectionResumesFilter(django_filters.FilterSet):
         ids = Favorite.objects.filter(vacancy_id=vacancy.id).values_list(
             "resume_id", flat=True
         )
-        resumes = queryset.filter(id__in=ids)
-        return resumes
+        return queryset.filter(id__in=ids)
 
     def get_max_skills(self, queryset, name, value):
         request = self.request
@@ -102,8 +101,7 @@ class SelectionResumesFilter(django_filters.FilterSet):
             )
             if skills_vacancy <= skills_resume:
                 res.append(resume.id)
-        queryset = queryset.filter(id__in=res)
-        return queryset
+        return queryset.filter(id__in=res)
 
     class Meta:
         model = Resume

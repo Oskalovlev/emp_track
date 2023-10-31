@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from tracker.models import (
+from backend.tracker.models import (
     Tracker,
     Comparison,
     Favorite,

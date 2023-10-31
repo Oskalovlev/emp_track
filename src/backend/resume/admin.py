@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from resume.models import Resume, SkillInResume, Experience, Education
+from backend.resume.models import Resume, SkillInResume, Experience, Education
 
 # admin.site.register(City)
 # admin.site.register(ResumeSkill)

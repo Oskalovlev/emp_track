@@ -8,7 +8,7 @@ from rest_framework import permissions
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="API Documentation for YaTrack",
+        title="API Documentation for EmpTrack",
         default_version="v1",
         description="API documentation",
         license=openapi.License(name="BSD License"),
@@ -48,7 +48,7 @@ if settings.DEBUG:
         static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     )
 
-if settings.DEBUG:
-    urlpatterns += tuple(
-        static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    )
+# if settings.DEBUG:
+#     urlpatterns += tuple(
+#         static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+#     )

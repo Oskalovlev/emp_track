@@ -1,7 +1,7 @@
 from django.urls import include, re_path
 from rest_framework.routers import DefaultRouter
 
-from api.views import (
+from backend.api.views import (
     EmployerViewset,
     TrackerViewset,
     ComparisonViewset,
