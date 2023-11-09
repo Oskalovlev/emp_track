@@ -1,10 +1,10 @@
-# from datetime import date
+from datetime import date
 
 from django.db import models
 from django.conf import settings
 
-from backend.user.models import User
-from backend.core.models import Skill, City
+from user.models import User
+from core.models import Skill, City
 
 # from vacancy.models import Vacancy
 
@@ -25,14 +25,16 @@ class Resume(models.Model):
         "Фото",
         upload_to="photo/",
         default=None,
+        null=True,
     )
     gender = models.CharField(
+        "Пол",
         choices=settings.GENDER_FLAG,
-        verbose_name="Пол",
     )
     grade = models.CharField(
         "Уровень",
         max_length=settings.MAX_LENGTH,
+        null=True,
     )
     birthday = models.DateField(
         "День рождения",
@@ -42,6 +44,7 @@ class Resume(models.Model):
     city = models.ForeignKey(
         City,
         on_delete=models.SET_NULL,
+        null=True,
         verbose_name="Город",
     )
     # grade = models.CharField("Грейд")
@@ -49,12 +52,18 @@ class Resume(models.Model):
     telegram = models.CharField(
         "Телеграм",
         max_length=50,
+        null=True,
     )
     github = models.CharField(
         "GitHub",
         max_length=50,
+        null=True,
     )
-    portfolio = models.CharField("Портфолио", max_length=50)
+    portfolio = models.CharField(
+        "Портфолио",
+        max_length=50,
+        null=True,
+    )
     about_me = models.TextField(
         "О себе",
     )
@@ -82,33 +91,14 @@ class Resume(models.Model):
     def __str__(self):
         return f"{self.candidate}" if hasattr(self, "candidate") else ""
 
-    # def get_age(self) -> int:
-    #     """Получить возраст кандидата."""
-    #     return (date.today() - self.birthday).year
-
-    # get_age.short_description = "Возраст"
-
-    # def get_main_skills(
-    #     self, vacancy: Vacancy, amount: int
-    # ) -> list[(Skill, int),]:
-    #     """
-    #     Определение главных скилов для вакансии.
-
-    #     Приходит:
-    #     vacancy - Вакансия
-    #     amount - число главных скилов
-
-    #     Уходит:
-    #     Список пар:
-    #     Skill - id? name?
-    #     rating - значение соотв. навыка
-    #     """
-    #     return [("Навык 1", 100), ("Навык 5", 80), ("Навык 3", 70)]
-
-    # get_age.short_description = "Главные Навыки"
+    def get_age(self) -> int:
+        """Получить возраст кандидата."""
+        return (date.today() - self.birthday).year
 
 
 class SkillInResume(models.Model):
+    """Модель скилла в резюме."""
+
     skill = models.ForeignKey(
         Skill,
         on_delete=models.SET_NULL,
@@ -142,6 +132,8 @@ class SkillInResume(models.Model):
 
 
 class Experience(models.Model):
+    """Модель опыта кандидата."""
+
     resume = models.ForeignKey(
         Resume,
         on_delete=models.CASCADE,
@@ -167,6 +159,8 @@ class Experience(models.Model):
 
 
 class BaseEducationModel(models.Model):
+    """Абстрактная модель базовых полей <образования>."""
+
     name = models.CharField(
         "Название",
         max_length=settings.MAX_LENGTH,
@@ -183,13 +177,12 @@ class BaseEducationModel(models.Model):
     class Meta:
         abstract = True
 
+    def __str__(self):
+        return self.name
+
 
 class HigherEducation(BaseEducationModel):
-
-    institution = models.CharField(
-        "Учебное заведение",
-        max_length=settings.MAX_LENGTH,
-    )
+    """Модель высшего образования."""
 
     class Meta:
         verbose_name = "Высшее образование"
@@ -197,12 +190,16 @@ class HigherEducation(BaseEducationModel):
 
 
 class CourseEducation(BaseEducationModel):
+    """Модель дополнительного образования/курсов."""
+
     class Meta:
         verbose_name = "Дополнительное образование"
         verbose_name_plural = "Дополнительные образования"
 
 
 class Education(models.Model):
+    """Модель образования."""
+
     resume = models.ForeignKey(
         Resume,
         on_delete=models.CASCADE,
@@ -213,16 +210,15 @@ class Education(models.Model):
         HigherEducation,
         on_delete=models.CASCADE,
         related_name="educations",
+        verbose_name="Высшее бразование",
     )
     course = models.ForeignKey(
         CourseEducation,
         on_delete=models.CASCADE,
         related_name="educations",
+        verbose_name="Доп. образование",
     )
 
     class Meta:
         verbose_name = "Образование"
         verbose_name_plural = "Образования"
-
-    def __str__(self):
-        return f"{self.institution}"

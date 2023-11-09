@@ -2,11 +2,11 @@ from django.db.transaction import atomic
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers, relations
 
-from backend.user.models import User
-from backend.core.models import City, Skill
-from backend.tracker.models import Tracker, Comparison, Favorite, Invitation
-from backend.resume.models import Resume, SkillInResume
-from backend.vacancy.models import Vacancy, SkillInVacancy
+from user.models import User
+from core.models import City, Skill
+from tracker.models import Tracker, Comparison, Favorite, Invitation
+from resume.models import Resume, SkillInResume
+from vacancy.models import Vacancy, SkillInVacancy
 
 
 class EmployerSerializer(serializers.ModelSerializer):
@@ -136,7 +136,7 @@ class ResumeCreateSerializer(serializers.ModelSerializer):
             "telegram",
             "github",
             "about_me",
-            "status_type_work",
+            "type_work",
             "status_finded",
         )
         read_only_fields = ("author",)

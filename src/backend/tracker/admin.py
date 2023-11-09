@@ -1,12 +1,10 @@
 from django.contrib import admin
 
-from backend.tracker.models import (
+from tracker.models import (
     Tracker,
     Comparison,
     Favorite,
     Invitation,
-    Interested,
-    # UserViewedResume,
 )
 
 
@@ -57,23 +55,16 @@ class InvitationAdmin(admin.ModelAdmin):
     list_display = (
         "resume",
         "vacancy",
+        "status",
     )
     search_fields = (
         "resume",
         "vacancy",
+        "status",
     )
     list_filter = (
         "resume",
         "vacancy",
+        "status",
     )
     empty_value_display = "--пусто--"
-
-
-@admin.register(Interested)
-class InterestedAdmin(admin.ModelAdmin):
-    pass
-
-
-# @admin.register(UserViewedResume)
-# class UserViewedResume(admin.ModelAdmin):
-#     pass

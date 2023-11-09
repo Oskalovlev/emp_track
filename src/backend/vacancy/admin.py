@@ -1,10 +1,20 @@
 from django.contrib import admin
 
-from vacancy.models import Vacancy, SkillInVacancy
+from vacancy.models import (
+    Vacancy,
+    SkillInVacancy,
+    EmployerProfile,
+    VacancyInProfile,
+)
 
 
 class SkillInVacancyInline(admin.StackedInline):
     model = SkillInVacancy
+    extra = 0
+
+
+class VacancyInProfileInline(admin.StackedInline):
+    model = VacancyInProfile
     extra = 0
 
 
@@ -14,6 +24,7 @@ class VacancyAdmin(admin.ModelAdmin):
         "author",
         "position",
         "specialty",
+        "description",
         "city",
     )
     search_fields = (
@@ -29,18 +40,33 @@ class VacancyAdmin(admin.ModelAdmin):
     inlines = (SkillInVacancyInline,)
 
 
-@admin.register(SkillInVacancy)
-class SkillInVacancyAdmin(admin.ModelAdmin):
+@admin.register(EmployerProfile)
+class EmployerProfileAdmin(admin.ModelAdmin):
     list_display = (
-        "skill",
-        "vacancy",
+        "employer",
+        "organization",
     )
     search_fields = (
-        "skill",
-        "vacancy",
+        "employer",
+        "organization",
     )
-    list_filter = ("skill",)
+    list_filter = ("employer",)
     empty_value_display = "--пусто--"
+    inlines = (VacancyInProfileInline,)
+
+
+# @admin.register(SkillInVacancy)
+# class SkillInVacancyAdmin(admin.ModelAdmin):
+#     list_display = (
+#         "skill",
+#         "vacancy",
+#     )
+#     search_fields = (
+#         "skill",
+#         "vacancy",
+#     )
+#     list_filter = ("skill",)
+#     empty_value_display = "--пусто--"
 
 
 # @admin.register(Skill)

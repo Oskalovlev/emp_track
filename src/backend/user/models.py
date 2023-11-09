@@ -61,7 +61,7 @@ class User(AbstractUser):
     #     null=True,
     #     blank=True,
     # )
-    role = models.CharField(choices=settings.ROLE)
+    role = models.CharField("Роль", choices=settings.ROLE)
 
     class Meta:
         verbose_name = "Пользователь"

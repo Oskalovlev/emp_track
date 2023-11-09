@@ -39,6 +39,9 @@ class Skill(NameModel):
 class Organization(NameModel):
     """Модель организации нанимателей."""
 
+    description = models.TextField(
+        "Описание организации",
+    )
     itn = models.CharField(
         max_length=50,
         unique=True,

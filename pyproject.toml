@@ -21,11 +21,6 @@ pillow = "^10.1.0"
 psycopg2-binary = "^2.9.9"
 taskipy = "^1.12.0"
 
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
 [tool.poetry.group.dev]
 optional = true
 
@@ -43,5 +38,12 @@ pytest = "^7.4.2"
 
 [tool.taskipy.tasks]
 app = "python src/backend/manage.py runserver"
-migrate = "python src/backend/manage.py migrate"
-makemigrations = "python src/backend/manage.py makemigrations user"
+
+[tool.poetry.scripts]
+m_mig = "src.backend.scripts.migrations:makemigrations"
+mig = "src.backend.scripts.migrations:migrate"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

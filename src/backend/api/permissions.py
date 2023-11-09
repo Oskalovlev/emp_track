@@ -1,6 +1,6 @@
 from rest_framework import permissions
 
-from backend.vacancy.models import Vacancy
+from vacancy.models import Vacancy
 
 
 class IsEmployerSelfVacancy(permissions.BasePermission):

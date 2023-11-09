@@ -1,10 +1,10 @@
 import django_filters
 
-from backend.resume.models import Resume, SkillInResume
+from resume.models import Resume, SkillInResume
 
 # from user.models import Subscription, User
-from backend.vacancy.models import Vacancy, SkillInVacancy
-from backend.tracker.models import Favorite
+from vacancy.models import Vacancy, SkillInVacancy
+from tracker.models import Favorite
 
 
 class SelectionResumesFilter(django_filters.FilterSet):

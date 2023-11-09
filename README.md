@@ -16,16 +16,16 @@
 
 <details><summary><h2>Структура проекта</h2></summary>
     <details><summary><h4>Структура базы данных</h4></summary>
-        <img src="/docs/db_Emp_Track.jpg"/>
+        <img src="/docs/db_emp_track.jpg"/>
     </details>
     <details><summary><h4>Структура репозитория</h4></summary>
-        <img src="/docs/rep_Emp_Track.jpg"/>
+        <img src="/docs/rep_emp_track.jpg"/>
     </details>
     <details><summary><h4>Специфика ендпойнтов в Swagger</h4></summary>
-        <img src="/docs/swagg_Emp_Track.jpg"/>
+        <img src="/docs/swagg_emp_track.jpg"/>
     </details>
     <details><summary><h4>Документация Redoc</h4></summary>
-        <img src="/docs/doc_Emp_Track.jpg"/>
+        <img src="/docs/doc_emp_track.jpg"/>
     </details>
 </details>
 
@@ -124,22 +124,26 @@ api/tracker/<vacancy_id>/invitation/  # Приглашенные кандида�
     </details>
 
     <details><summary><h4>Запуск виртуального окружения</h4></summary>
-
+   - Создать файл .toml
+     ```bash
+        poetry init
+     ```
+     > Соглашаяь на все стандартные значения, если нет другого варианта
    - Создание виртуального окружения:
      ```bash
-            poetry env use python
+        poetry env use python
      ```
     - Установка зависимостей:
       ```bash
-            poetry install --with dev,test
+        poetry install --with dev,test
       ```
     - Запуск оболочки и активация виртуального окружения (из папки проекта):
       ```bash
-            poetry shell
+        poetry shell
       ```
     - Проверка активации виртуального окружения:
       ```bash
-            poetry env list
+        poetry env list
       ```
     </details>
 
@@ -175,18 +179,18 @@ api/tracker/<vacancy_id>/invitation/  # Приглашенные кандида�
 4. *Настройте pre-commit*:
    `pre-commit` установится автоматически, после ввода команды зависимостей, можно проверить:
         ```bash
-        pre-commit --version
+            pre-commit --version
         ```
 
     Для работы нужно ввести команду:
         ```bash
-        pre-commit install
+            pre-commit install
         ```
 
     Теперь `pre-commit` рабатывает автоматически при коммитах.
-    Исправленные `black'ом` файлы можно добавить:
+    > Исправленные `black'ом` файлы можно добавить:
         ```bash
-        git add .
+            git add .
         ```
 </details>
 

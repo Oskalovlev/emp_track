@@ -6,18 +6,18 @@ from rest_framework import viewsets, response, status, serializers
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from backend.user.models import User
-from backend.core.models import Skill
+from user.models import User
+from core.models import Skill
 
 # , Organization, City
-from backend.tracker.models import Tracker, Comparison, Favorite, Invitation
-from backend.resume.models import Resume
+from tracker.models import Tracker, Comparison, Favorite, Invitation
+from resume.models import Resume
 
 # , SkillInResume
-from backend.vacancy.models import Vacancy
+from vacancy.models import Vacancy
 
 # , SkillInVacancy
-from backend.api.serializers import (
+from api.serializers import (
     EmployerSerializer,
     CandidateSerializer,
     # OrganizationSerializer,
@@ -39,7 +39,7 @@ from backend.api.serializers import (
 
 # from api.permissions import IsAuthor,
 # from api.filters import SkillFilter, ComparisonFilter
-from backend.api.pagination import LimitPageNumberPagination
+from api.pagination import LimitPageNumberPagination
 
 
 class EmployerViewset(DjoserUserViewSet):

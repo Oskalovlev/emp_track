@@ -1,8 +1,8 @@
 from django.db import models
 from django.conf import settings
 
-from backend.vacancy.models import Vacancy
-from backend.resume.models import Resume
+from vacancy.models import Vacancy
+from resume.models import Resume
 
 # from user.models import User
 
@@ -48,8 +48,8 @@ class Comparison(ResumeInVacancy):
     """Модель подходящих кандидатов по резюме."""
 
     class Meta:
-        verbose_name = "Сравнение подходящих вакансий"
-        verbose_name_plural = "Сравнения подходящих вакансий"
+        verbose_name = "Подходящий кандидат"
+        verbose_name_plural = "Подходящие кандидаты"
         default_related_name = "comparisons"
         constraints = (
             models.UniqueConstraint(
@@ -80,24 +80,6 @@ class Favorite(ResumeInVacancy):
         )
 
 
-class Interested(ResumeInVacancy):
-    """Модель заинтересованный кандидат относительно вакансии."""
-
-    class Meta:
-        verbose_name = "Заинтерисованный"
-        verbose_name_plural = "Заинтересованные"
-        default_related_name = "interested"
-        constraints = (
-            models.UniqueConstraint(
-                fields=(
-                    "vacancy",
-                    "resume",
-                ),
-                name="unique_interested_resume",
-            ),
-        )
-
-
 class Invitation(ResumeInVacancy):
     """Модель приглашенных кандидатов по резюме."""
 
@@ -120,6 +102,24 @@ class Invitation(ResumeInVacancy):
                 name="unique_invitation_resume",
             ),
         )
+
+
+# class Interested(ResumeInVacancy):
+#     """Модель заинтересованный кандидат относительно вакансии."""
+
+#     class Meta:
+#         verbose_name = "Заинтерисованный"
+#         verbose_name_plural = "Заинтересованные"
+#         default_related_name = "interested"
+#         constraints = (
+#             models.UniqueConstraint(
+#                 fields=(
+#                     "vacancy",
+#                     "resume",
+#                 ),
+#                 name="unique_interested_resume",
+#             ),
+#         )
 
 
 # class UserViewedResume(models.Model):
