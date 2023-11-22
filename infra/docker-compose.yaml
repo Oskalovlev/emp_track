@@ -8,13 +8,10 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
-      - ./.env
+      - ./.env.prod
 
   backend:
     image: oskalov/yatrack-back:latest
-    # build:
-    #   context: ../src/backend
-    #   dockerfile: Dockerfile
     restart: always
     ports:
      - "8000:8000"
@@ -28,7 +25,7 @@ services:
     depends_on:
       - db
     env_file:
-      - ./.env
+      - ./.env.prod
 
   # frontend:
   #   image: frontend:latest
@@ -39,7 +36,7 @@ services:
 
   nginx:
     image: nginx:1.23.4-alpine
-    # restart: always
+    restart: always
     ports:
       - "80:80"
     volumes:
